@@ -1,0 +1,28 @@
+name: CI do Sistema Especialista Agricola (Python)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configurar Ambiente Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'  # Usa a última versão estável do Python 3
+      
+      - name: Instalar Dependências (pyTest)
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest  # Instala o Pytest
+          # pip install -r requirements.txt 
+      
+      - name: Executar Testes de Lógica Funcional
+        # comando executa todos os arquivos de teste que seguem a convencao
+        run: pytest
